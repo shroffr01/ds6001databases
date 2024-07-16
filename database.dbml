@@ -1,0 +1,51 @@
+Project Lab06 {
+  database_type: 'PostgreSQL'
+ 
+}
+
+
+Table Prescriptions as PR {
+  patient_name varchar [pk]
+  date_of_birth varchar [pk]
+  prescribed_drug varchar [pk]
+
+}
+Table Patients {
+  patient_name varchar [pk]
+  date_of_birth varchar [pk]
+  patient_sex varchar 
+  patient_insurance varchar
+  attending_physician varchar
+}
+Table Diagnosis {
+  patient_name varchar [pk]
+  date_of_birth varchar [pk]
+  prior_condition varchar [pk]
+}
+Table Drugs {
+  prescribed_drug varchar [pk]
+  drug_maker varchar    
+  cost int 
+}
+Table Physicians {
+  attending_physician varchar [pk]
+  ap_med_school varchar
+  ap_years_experience varchar
+  hospital varchar
+}
+
+Table Hospitals {
+  hospital varchar [pk]
+  hospital_location varchar 
+
+}
+
+Ref: Prescriptions.patient_name > Patients.patient_name
+Ref: Prescriptions.date_of_birth > Patients.date_of_birth
+Ref: Prescriptions.prescribed_drug > Patients.patient_sex
+Ref: Patients.patient_name < Diagnosis.patient_name
+Ref: Patients.date_of_birth < Diagnosis.date_of_birth
+Ref: Patients.patient_sex > Diagnosis.patient_name
+Ref: Diagnosis.patient_name - Drugs.prescribed_drug
+Ref: Physicians.attending_physician < Patients.attending_physician
+Ref: Physicians.hospital > Hospitals.hospital
